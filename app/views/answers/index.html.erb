@@ -1,0 +1,22 @@
+<div class="container">
+  <header class="jumbotron my-4">
+    <h1 class="display-3">Answers</h1>
+  </header>
+  <div>現在回答募集中の質問一覧です</div>
+  <div class="row text-center">
+    <% @posts.each do |post| %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          <div class="card-body">
+            <h4 class="card-title"><%= post.title %></h4>
+            <p class="card-text"><%= post.body %></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to '回答する', "/answers/new/#{post.id}" %>
+          </div>
+        </div>
+    <% end %>
+    </div>
+  </div>
+</div>

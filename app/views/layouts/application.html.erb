@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>lyriiiiics</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <meta name="viewport" content="width=device-width">
+
+    <!-- 以下、headの中はテンプレートのコピー -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  </head>
+
+  <body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Well Said!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <% if user_signed_in? && current_user.role == '質問者' %>
+              <%= link_to "POST", "/posts", class: "nav-link" %>
+            <% elsif user_signed_in? && current_user.role == '回答者' %>
+              <%= link_to "POST", "/posts", class: "nav-link" %>
+            <% end %>   
+          </li>
+          <li class="nav-item">
+            <% if user_signed_in? && current_user.role == '質問者' %>
+              <%= link_to "MYPAGE", posts_mypage_path, class: "nav-link" %>
+            <% elsif user_signed_in? && current_user.role == '回答者' %>
+              
+            <% end %>   
+          </li>
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <a><%= link_to "LOGOUT", destroy_user_session_path, class: "nav-link", :method => :delete %></a>
+            <% else %>
+              <%= link_to "LogIn", "/users/sign_in", class: "nav-link" %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+  <footer class="py-5 bg-info">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+  
+  </footer>
+  </body>
+</html>

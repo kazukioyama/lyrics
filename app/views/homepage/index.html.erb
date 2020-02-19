@@ -1,0 +1,99 @@
+<!-- Header -->
+<header class="masthead">
+  <div>
+    <div class="intro-text">
+      <div class="intro-heading">
+        <div>「何ができるようになるか」</div>
+        <div>で会社を選べる世界に</div>
+      </div>
+      <a class="btn btn-xl js-scroll-trigger top-button" href="#services">Jobmiruとは</a>
+      <a class="btn btn-xl js-scroll-trigger top-button" href="/posts">投稿を見る</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- Jobmiruとは -->
+<section id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">Jobmiruとは</h2>
+        <h3 class="section-subheading text-muted">「何のスキルが身につくのか」「具体的に何をするのか」に特化した、<br>実際に働いた社員の声の共有サイトです。</h3>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">特徴</h4>
+        <p class="text-muted text-muted-des"><i class="fa fa-check fa-fw"></i>「出来るようになること」「具体的に何をするのか」について、実際に働いたことのある方が投稿<br><i class="fa fa-check fa-fw"></i>投稿項目はグラフを使ってビジュアル化<br><i class="fa fa-check fa-fw"></i>年収・福利厚生といった項目は無いシンプルなサービス<br></p>
+      </div>
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">ミッション</h4>
+        <p class="text-muted text-muted-des"><i class="fa fa-check fa-fw"></i>誰もが「出来るようになること」「具体的に何をするのか」で会社を選べるようにし、個人のスキルアップの手助けとなること<br><i class="fa fa-check fa-fw"></i>就業のミスマッチが減ることにより、不本意な転職が減少し、日本全体の生産性を向上させること</p>
+      </div>
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-history fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">設立経緯</h4>
+        <p class="text-muted text-muted-des"><i class="fa fa-check fa-fw"></i>私自身の就職・転職活動時に、「スキルを身につけたい」という会社を選ぶ軸があったものの、それぞれの会社で働くことによって身につくスキルについて分からず、その情報についても集めることができなかった<br><i class="fa fa-check fa-fw"></i>1社で定年まで働くスタイルは過去のものとなりつつあり、今後は1人1人が自らのスキルを高めるために働く時代が来ると感じ、自分で1から作り、立ち上げた。</p>
+      </div>
+    </div>
+    <div class="col-lg-12 text-center">
+      <h3 class="section-subheading text-muted">設立経緯、今後の計画等の詳細はこちらの  <u><a href="http://ysk-pro.hatenablog.com/entry/2018/03/25/100427" target="_blank"><i class="fa fa-external-link"></i>ブログ</a></u> をご参照ください。</h3>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light" id="portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">投稿を見る</h2>
+        <h3 class="section-subheading text-muted">会員登録不要で投稿を見ることができます。<br>いいね！・コメントを行うためには新規登録（無料・1分程度）が必要です。</h3>
+        <div>
+          <h4 >最新の投稿</h4>
+          <div class="top-post">
+           
+          </div>
+        </div>
+        <a class="btn btn-xl index-button" href="/posts">投稿一覧へ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if user_signed_in? %>
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">投稿する</h2>
+          <h3 class="section-subheading text-muted">悩んでいる方のために、あなたの経験をシェアしましょう。</h3>
+          <a class="btn btn-xl index-button" href="/posts/new">投稿する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+<% else %>
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">無料会員登録</h2>
+          <h3 class="section-subheading text-muted">1分程度でできます。<br>登録すると投稿・いいね！・コメントができます。</h3>
+          <a class="btn btn-xl index-button" href="/users/sign_up">無料会員登録へ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

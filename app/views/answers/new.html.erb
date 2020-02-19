@@ -1,0 +1,10 @@
+<h1>New Answer</h1>
+ 
+<div>質問情報</div>
+タイトル：<%= @post.title %><br>
+内容：<%= @post.body %><br>
+ 
+ 
+<%= render 'form', answer: @answer %>
+ 
+<%= link_to 'Back', posts_path %>

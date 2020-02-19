@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="text-right">
+<!--この質問をしたユーザーであれば修正を許可-->
+    <% if current_user.id == @post.user_id %>
+      <%= link_to '修正', edit_post_path(@post) %> |
+    <% end %>
+    <%= link_to '戻る', posts_path %>
+  </div>
+  <header class="jumbotron my-4">
+    <h5 class="card-title"><%= @post.title %></h5>
+    <h5 class="card-title"><%= @post.artist %></h5>
+    <br>
+    <h3 class="card-title"><%= @post.lyric %></h3>　    
+    <% if current_user.role == '回答者' %>
+      <%= link_to 'コメントする', "/answers/new/#{@post.id}", class: 'btn btn-primary btn-lg' %>
+    <% end %>
+  </header>
+  <div class="card-body">
+    ジャンル：
+    <% @post.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+    <br>
+    <br>
+    内容：<br><strong><%= @post.body %></strong><br>
+    <br>
+    Youtube:
+    <br>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @post.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <br>
+    <br>
+    <% if current_user.already_liked?(@post) %>
+      <%= button_to 'いいねを取り消す', post_like_path(@post), class: "btn btn-default btn-circle", method: :delete %>
+    <% else %>
+      <%= button_to 'いいね', post_likes_path(@post) ,class: "btn btn-primary btn-circle" %>
+    <% end %>
+    <br>
+  いいね数: <%= @post.likes.count %>
+  <br>
+  <br>
+  <% @post.liked_users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+
+    質問ユーザー：<span class="<%= "user_color" if current_user.id == @post.user_id %>"><%= user_info(@post.user_id).name %></span>
+  </div>
+  <div class="row">
+  <!-- @postがたくさん持っている(has_manyな)answersをloopさせて一つずつ表示
+  has_manyなデータを取得するときは、配列でデータを取得します。 -->
+  <% @post.answers.each do |answer| %>
+    <div class="col-lg-12 col-md-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <!--先程作成したヘルパーメソッド。このメソッドがあるおかげで
+          application_controller.rbを継承したコントローラーであれば
+          このヘルパーメソッドが使えます。
+          仮にこのヘルパーメソッドがなかったらそれぞれのコントローラーで同じ処理を書かなければ
+          ならないので、とても汚いコードになってしまいます。
+          同じコードは極力書かずにひとまとめにすることをこれからは気にしましょう-->
+          <div><%= answer.body %></div>
+          <p class="text-right">
+            <span class="<%= "user_color" if current_user.id == answer.user_id %>">
+              回答ユーザー<%= user_info(answer.user_id).name %>
+            </span>    
+          </p>
+          <% answer.reactions.each do |reaction| %>
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div><%= reaction.body %></div>
+                    <p class="text-right">
+                      <span class="<%= "user_color" if current_user.id == reaction.user_id %>">
+                        回答ユーザー<%= user_info(reaction.user_id).name %>
+                      </span>    
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+          <% end %>
+          <p class="text-right"><%= link_to '反応する', "/reactions/new/#{answer.id}" %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="text-right">
+  <!--この質問をしたユーザーであれば修正を許可-->
+    <% if current_user.id == @post.user_id %>
+      <%= link_to '修正', edit_post_path(@post) %> |
+    <% end %>
+    <%= link_to '戻る', posts_path %>
+  </div>
+</div>

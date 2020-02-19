@@ -1,0 +1,47 @@
+<div class="container">
+  <header class="jumbotron my-4">
+    <h1 class="display-3">投稿一覧</h1>
+    <p class="lead">お気に入りの名言や歌詞を投稿してみよう。</p>
+    <br>
+    <% if current_user.role == '質問者' %>
+      <%= link_to '投稿する！', new_post_path, class: 'btn btn-primary btn-lg' %>
+    <% elsif current_user.role == '回答者' %>
+      <h6>詳細を押してコメントしてみよう</h6>
+    <% end %>
+  </header>
+  <%= search_form_for @q do |f| %>
+    <%= f.label :title_cont %>
+    <%= f.search_field :title_cont %>
+    <%= f.submit %>
+  <% end %>
+  <br>
+  <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
+    <%= select_tag :tag_id,
+                   options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                   {
+                     prompt: 'タグで絞り込み検索',
+                     onchange: 'submit(this.form);'
+                   }
+    %>
+  <% end %>
+  <br>
+  <div class="row text-center">
+    <% @posts.each do |post| %>
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-150">
+      
+        
+        <div class="card-body">
+          <h4 class="card-title"><%= post.title %> <br></h4>
+          <HR>
+          <em class="card-text"><%= post.lyric %> <br></em>
+        </div>
+        <div class="card-footer">
+          <%= link_to '詳細', post %>
+          (いいね:<%= post.liked_users.count %>)
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
