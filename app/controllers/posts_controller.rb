@@ -9,6 +9,8 @@ class PostsController < ApplicationController
     @@user_type = current_user.role
     if params[:q]
       @posts = @q.result(distinct: true)
+    elsif params[:tag_id].present?
+      @posts = Tag.find(params[:tag_id]).posts
     else
       @posts = Post.all
     end
@@ -18,6 +20,8 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @like = Like.new
+    @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   # GET /posts/new

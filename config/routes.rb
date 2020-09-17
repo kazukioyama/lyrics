@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'posts/mypage' => 'posts#mypage'
   resources :posts do
     resources :likes, only: [:create, :destroy]
+    resources :comments
   end
   resources :answers, :except => [:new]
   resources :reactions, :except => [:new]

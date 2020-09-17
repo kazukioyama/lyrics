@@ -1,7 +1,7 @@
 <div class="container">
   <header class="jumbotron my-4">
     <h1 class="display-3">投稿一覧</h1>
-    <p class="lead">お気に入りの名言や歌詞を投稿してみよう。</p>
+    <p class="lead">お気に入りの歌詞を投稿してみよう。</p>
     <br>
     <% if current_user.role == '質問者' %>
       <%= link_to '投稿する！', new_post_path, class: 'btn btn-primary btn-lg' %>
