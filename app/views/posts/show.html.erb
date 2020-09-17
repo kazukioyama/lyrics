@@ -29,11 +29,31 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @post.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <br>
     <br>
-    <%= form_with model: [@post, @comment], local: true do |f| %>
-      <div class="field">
-        <%= f.text_field :text, class: 'input' %>
+    <% if user_signed_in? %>
+      <%= form_with model: [@post, @comment], local: true do |f| %>
+        <div class="field">
+          <%= f.text_field :text, class: 'input' %>
+        </div>
+        <%= f.submit class: 'button is-primary' %>
+      <% end %>
+    <% end %>
+    <div>
+      <% if @post.user == current_user %>
+        <%= link_to 'delete', [@post], method: :delete %>
+      <% end %>
+    </div>
+    <% @post.comments.each do |comment| %>
+      <div>
+          <%= comment.user.name %>
       </div>
-      <%= f.submit class: 'button is-primary' %>
+      <div>
+        <%= comment.text %>
+      </div>
+      <% if comment.user == current_user %>
+        <div>
+          <%= link_to 'delete', [@post, comment], method: :delete %>
+        </div>
+      <% end %>
     <% end %>
     <% if current_user.already_liked?(@post) %>
       <%= button_to 'いいねを取り消す', post_like_path(@post), class: "btn btn-default btn-circle", method: :delete %>
