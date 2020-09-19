@@ -22,6 +22,7 @@ class PostsController < ApplicationController
     @like = Like.new
     @post = Post.find(params[:id])
     @comment = Comment.new
+    @new_comment = Comment.new
   end
 
   # GET /posts/new
